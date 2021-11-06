@@ -1,6 +1,10 @@
 #!/bin/bash
 MAX_ATTEMPTS=5
+
 adb root
+sleep 10
+adb shell content insert --uri content://com.google.settings/partner --bind name:s:network_location_opt_in --bind value:i:1
+
 adb devices | grep emulator | cut -f1 | while read id; do
     apks=(/usr/bin/*.apk)
     for apk in "${apks[@]}"; do
